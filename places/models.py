@@ -24,6 +24,16 @@ class Place(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = [
+            "title",
+            "description_short",
+            "description_long",
+            "lng",
+            "lat",
+            "place_id"
+        ]
+
 class Image(models.Model):
     place = models.ForeignKey(
         Place,
@@ -33,13 +43,20 @@ class Image(models.Model):
     )
 
     image = models.ImageField(
+        upload_to="media",
         verbose_name="картинка",
         null=True
     )
     image_number = models.IntegerField(
         verbose_name="номер картинки",
-        null=True
+        default=0,
+        db_index=True
     )
 
     def __str__(self):
         return f"{self.image_number} {self.place.title}"
+
+    class Meta:
+        ordering = [
+            "image_number"
+        ]

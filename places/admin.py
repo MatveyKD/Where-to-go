@@ -2,25 +2,32 @@ from django.contrib import admin
 from django.utils.html import format_html
 from .models import Place, Image
 
+from adminsortable2.admin import SortableStackedInline, SortableAdminBase
 
-class ImageInline(admin.TabularInline):
+
+class ImageStackedInline(SortableStackedInline):
     model = Image
 
-    fields = ("image", "preview", "image_number")
+    fields = [("image", "preview"), ("image_number")]
     readonly_fields = ("preview",)
+
+    extra = 0
 
     def preview(self, obj):
         if obj.image:
-            return format_html('<img src="{}" width="{}" height={} style="max-width: 200px; max-height: 200px;"/>'.format(
-                obj.image.url,
-                obj.image.width,
-                obj.image.height,
-            ))
+            return format_html(
+                '<img src="{image_url}" style="max-height: 200px;"/>',
+                image_url=obj.image.url
+            )
         else:
             return ""
 
 @admin.register(Place)
-class PlaceAdmin(admin.ModelAdmin):
+class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [
-        ImageInline,
+        ImageStackedInline,
     ]
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    pass
