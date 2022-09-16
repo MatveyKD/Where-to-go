@@ -1,5 +1,5 @@
 # Where-to-go
-Сайт с интересными местами по Москве
+Сайт с интересными местами по Москве. Работающий сайт - [https://matvey258.pythonanywhere.com](https://matvey258.pythonanywhere.com).
 
 ## Как установить
 
