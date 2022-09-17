@@ -1,18 +1,22 @@
+import os
+import json
+import requests
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
-import json
+from django.core.exceptions import MultipleObjectsReturned
 from places.models import Place, Image
-import requests
-import os
 
 class Command(BaseCommand):
     help = 'Loading place from json'
 
     def handle(self, *args, **options):
-        if options["load_dir"]:
-            load_dir(options["path"])
-        else:
-            load_place(options["path"])
+        try:
+            if options["load_dir"]:
+                load_dir(options["path"])
+            else:
+                load_place(options["path"])
+        except MultipleObjectsReturned:
+            raise "Найдено несколько объектов вместо одного"
 
     def add_arguments(self, parser):
         parser.add_argument(
