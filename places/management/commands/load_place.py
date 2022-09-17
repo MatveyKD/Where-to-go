@@ -25,7 +25,7 @@ class Command(BaseCommand):
             '-d',
             '--load_dir',
             action='store_true',
-            help='Скачать ли всю папку'
+            help='Загрузить все .json файлы из папки'
         )
 
 def load_place(file_path):
