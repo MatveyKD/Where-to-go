@@ -1,9 +1,9 @@
+import os
+import json
+import requests
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
-import json
 from places.models import Place, Image
-import requests
-import os
 
 class Command(BaseCommand):
     help = 'Loading place from json'
