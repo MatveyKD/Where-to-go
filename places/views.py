@@ -1,9 +1,9 @@
 from django.http import JsonResponse
-from django.template import loader
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from places.models import Place
 from django.urls import reverse
+
 
 def index(request):
     places = Place.objects.all()
@@ -28,6 +28,7 @@ def index(request):
         }
     }
     return render(request, 'index.html', context)
+
 
 def place_details(request, place_id):
     place = get_object_or_404(Place, id=place_id)

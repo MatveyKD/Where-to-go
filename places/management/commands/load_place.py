@@ -6,12 +6,15 @@ from django.core.files.base import ContentFile
 from django.core.exceptions import MultipleObjectsReturned
 from places.models import Place, Image
 
+
 class Command(BaseCommand):
     help = 'Loading place from json'
 
     def handle(self, *args, **options):
         try:
-            if options["load_dir"]:
+            if options["load_url"]:
+                load_place(options["load_url"], url=True)
+            elif options["load_dir"]:
                 load_dir(options["path"])
             else:
                 load_place(options["path"])
@@ -31,15 +34,28 @@ class Command(BaseCommand):
             action='store_true',
             help='Загрузить все .json файлы из папки'
         )
+        parser.add_argument(
+            '-u',
+            '--load_url',
+            action='store',
+            help='Скачать .json по ссылке',
+            required=False,
+            default=False
+        )
 
-def load_place(file_path):
-    with open(file_path, 'rb') as file:
-        content = json.load(file)
+
+def load_place(file_path, url=False):
+    if not url:
+        with open(file_path, 'rb') as file:
+            content = json.load(file)
+    else:
+        response = requests.get(file_path)
+        content = response.json()
 
     place, _ = Place.objects.get_or_create(
-        title = content["title"],
-        lng = content["coordinates"]["lng"],
-        lat = content["coordinates"]["lat"],
+        title=content["title"],
+        lng=content["coordinates"]["lng"],
+        lat=content["coordinates"]["lat"],
         defaults={
             'description_long': content.get('description_long', ''),
             'description_short': content.get('description_short', ''),
@@ -49,10 +65,11 @@ def load_place(file_path):
     for index, img in enumerate(content["imgs"]):
         response = requests.get(img)
         Image.objects.get_or_create(
-            place = place,
-            image = ContentFile(response.content, f"{place.title}{index}.jpg"),
-            image_number = index
+            place=place,
+            image=ContentFile(response.content, f"{place.title}{index}.jpg"),
+            image_number=index
         )
+
 
 def load_dir(dir_path):
     for root, dirs, files in os.walk(dir_path):
