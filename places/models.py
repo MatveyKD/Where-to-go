@@ -8,9 +8,7 @@ class Place(models.Model):
         verbose_name="название места"
     )
     description_short = models.TextField(
-        verbose_name="короткое описание места",
-        blank=True,
-        null=True
+        verbose_name="короткое описание места"
     )
     description_long = HTMLField()
 
