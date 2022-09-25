@@ -10,7 +10,7 @@ class Place(models.Model):
     description_short = models.TextField(
         verbose_name="короткое описание места"
     )
-    description_long = HTMLField()
+    description_long = HTMLField(blank=True)
 
     lng = models.FloatField(verbose_name="широта")
     lat = models.FloatField(verbose_name="долгота")
