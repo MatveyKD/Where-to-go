@@ -38,8 +38,7 @@ class Image(models.Model):
 
     image = models.ImageField(
         upload_to="media",
-        verbose_name="картинка",
-        null=True
+        verbose_name="картинка"
     )
     image_number = models.IntegerField(
         verbose_name="номер картинки",
