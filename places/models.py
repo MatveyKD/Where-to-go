@@ -15,11 +15,6 @@ class Place(models.Model):
     lng = models.FloatField(verbose_name="долгота")
     lat = models.FloatField(verbose_name="широта")
 
-    place_id = models.CharField(
-        max_length=20,
-        null=True
-    )
-
     def __str__(self):
         return self.title
 
@@ -29,8 +24,7 @@ class Place(models.Model):
             "description_short",
             "description_long",
             "lng",
-            "lat",
-            "place_id"
+            "lat"
         ]
 
 class Image(models.Model):
