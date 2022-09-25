@@ -12,8 +12,8 @@ class Place(models.Model):
     )
     description_long = HTMLField(blank=True)
 
-    lng = models.FloatField(verbose_name="широта")
-    lat = models.FloatField(verbose_name="долгота")
+    lng = models.FloatField(verbose_name="долгота")
+    lat = models.FloatField(verbose_name="широта")
 
     place_id = models.CharField(
         max_length=20,
