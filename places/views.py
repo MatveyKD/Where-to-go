@@ -21,10 +21,13 @@ def index(request):
                         "properties": {
                             "title": place.title,
                             "placeId": place.id,
-                            "detailsUrl": reverse(place_details, kwargs={'place_id': place.id})
+                            "detailsUrl": reverse(
+                                place_details,
+                                kwargs={'place_id': place.id}
+                            )
                         }
                     }
-                for place in places]
+                    for place in places]
         }
     }
     return render(request, 'index.html', context)
@@ -45,4 +48,11 @@ def place_details(request, place_id):
             "lat": place.lat
         }
     }
-    return JsonResponse(place_property, json_dumps_params={"ensure_ascii": False, "indent": 4}, safe=False)
+    return JsonResponse(
+        place_property,
+        json_dumps_params={
+            "ensure_ascii": False,
+            "indent": 4
+        },
+        safe=False
+    )

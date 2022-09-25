@@ -27,6 +27,7 @@ class Place(models.Model):
             "lat"
         ]
 
+
 class Image(models.Model):
     place = models.ForeignKey(
         Place,
