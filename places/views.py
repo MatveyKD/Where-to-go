@@ -9,7 +9,7 @@ def index(request):
     places = Place.objects.all()
 
     context = {
-        'places': {
+        "places": {
             "type": "FeatureCollection",
             "features": [
                 {
@@ -30,7 +30,7 @@ def index(request):
                 for place in places]
         }
     }
-    return render(request, 'index.html', context)
+    return render(request, "index.html", context)
 
 
 def place_details(request, place_id):
