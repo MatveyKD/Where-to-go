@@ -11,8 +11,9 @@
 
 - DEBUG — дебаг-режим. Поставьте True, чтобы увидеть отладочную информацию в случае ошибки.
 - SECRET_KEY — секретный ключ проекта
-- DATABASE_FILEPATH — полный путь к файлу базы данных SQLite, например: /home/user/schoolbase.sqlite3
 - ALLOWED_HOSTS — см документацию Django
+- DB_NAME - имя файла базы данных
+- DB_ENGINE - движок базы данных
 
 ## Как запустить
 
@@ -28,3 +29,7 @@
 Чтобы загрузить все файлы из папки, используйте аргумент --d:
 
     $ python manage.py load_place places/place.json --d True
+
+Чтобы загрузить файл по ссылке, используйте аргумент --u:
+
+    $ python manage.py load_place --u "https://places.com/place.json
