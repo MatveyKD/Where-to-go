@@ -10,24 +10,24 @@ def index(request):
 
     context = {
         'places': {
-                "type": "FeatureCollection",
-                "features": [
-                    {
-                        "type": "Feature",
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [place.lng, place.lat]
-                        },
-                        "properties": {
-                            "title": place.title,
-                            "placeId": place.id,
-                            "detailsUrl": reverse(
-                                place_details,
-                                kwargs={"place_id": place.id}
-                            )
-                        }
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [place.lng, place.lat]
+                    },
+                    "properties": {
+                        "title": place.title,
+                        "placeId": place.id,
+                        "detailsUrl": reverse(
+                            place_details,
+                            kwargs={"place_id": place.id}
+                        )
                     }
-                    for place in places]
+                }
+                for place in places]
         }
     }
     return render(request, 'index.html', context)
