@@ -15,15 +15,6 @@ class Place(models.Model):
     lng = models.FloatField(verbose_name="долгота")
     lat = models.FloatField(verbose_name="широта")
 
-    class Meta:
-        ordering = [
-            "title",
-            "description_short",
-            "description_long",
-            "lng",
-            "lat"
-        ]
-
     def __str__(self):
         return self.title
 

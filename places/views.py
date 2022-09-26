@@ -51,8 +51,6 @@ def place_details(request, place_id):
     return JsonResponse(
         place_property,
         json_dumps_params={
-            "ensure_ascii": False,
-            "indent": 4
-        },
-        safe=False
+            "ensure_ascii": False
+        }
     )

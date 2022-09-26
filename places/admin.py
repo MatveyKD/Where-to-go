@@ -14,19 +14,18 @@ class ImageStackedInline(SortableStackedInline):
     extra = 0
 
     def preview(self, obj):
-        if obj.image:
-            return format_html(
-                '<img src="{image_url}" style="max-height: 200px;"/>',
-                image_url=obj.image.url
-            )
-        else:
-            return ""
+        return format_html(
+            '<img src="{image_url}" style="max-height: 200px;"/>',
+            image_url=obj.image.url
+        )
+
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [
         ImageStackedInline,
     ]
+
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
