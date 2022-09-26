@@ -15,9 +15,6 @@ class Place(models.Model):
     lng = models.FloatField(verbose_name="долгота")
     lat = models.FloatField(verbose_name="широта")
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         ordering = [
             "title",
@@ -26,6 +23,9 @@ class Place(models.Model):
             "lng",
             "lat"
         ]
+
+    def __str__(self):
+        return self.title
 
 
 class Image(models.Model):
@@ -46,10 +46,10 @@ class Image(models.Model):
         db_index=True
     )
 
-    def __str__(self):
-        return f"{self.image_number} {self.place.title}"
-
     class Meta:
         ordering = [
             "image_number"
         ]
+
+    def __str__(self):
+        return f"{self.image_number} {self.place.title}"
