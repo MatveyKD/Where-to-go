@@ -52,7 +52,7 @@ def load_place(file_path, url=False):
         response = requests.get(file_path)
         content = response.json()
 
-    place, _ = Place.objects.get_or_create(
+    place, is_created = Place.objects.get_or_create(
         title=content["title"],
         lng=content["coordinates"]["lng"],
         lat=content["coordinates"]["lat"],
@@ -61,14 +61,14 @@ def load_place(file_path, url=False):
             'description_short': content.get('description_short', ''),
         }
     )
-
-    for index, img in enumerate(content["imgs"]):
-        response = requests.get(img)
-        Image.objects.get_or_create(
-            place=place,
-            image=ContentFile(response.content, f"{place.title}{index}.jpg"),
-            image_number=index
-        )
+    if is_created:
+        for index, img in enumerate(content["imgs"]):
+            response = requests.get(img)
+            Image.objects.get_or_create(
+                place=place,
+                image=ContentFile(response.content, f"{place.title}{index}.jpg"),
+                image_number=index
+            )
 
 
 def load_dir(dir_path):
