@@ -26,10 +26,10 @@
 
     $ python manage.py load_place places/place.json
 
-Чтобы загрузить все файлы из папки, используйте аргумент --d:
+Чтобы загрузить все файлы из папки, используйте аргумент -d:
 
-    $ python manage.py load_place places/place.json --d True
+    $ python manage.py load_place places/place.json -d True
 
-Чтобы загрузить файл по ссылке, используйте аргумент --u:
+Чтобы загрузить файл по ссылке, используйте аргумент -u:
 
-    $ python manage.py load_place --u "https://places.com/place.json
+    $ python manage.py load_place -u "https://places.com/place.json
