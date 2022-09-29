@@ -8,7 +8,7 @@ from places.models import Place, Image
 
 
 class Command(BaseCommand):
-    help = 'Loading place from json'
+    help = "Loading place from json"
 
     def handle(self, *args, **options):
         try:
@@ -23,22 +23,22 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            '-p',
-            '--path',
-            action='store',
-            help='Путь до json файла'
+            "-p",
+            "--path",
+            action="store",
+            help="Путь до json файла"
         )
         parser.add_argument(
-            '-d',
-            '--load_dir',
-            action='store_true',
-            help='Загрузить все .json файлы из папки'
+            "-d",
+            "--load_dir",
+            action="store_true",
+            help="Загрузить все .json файлы из папки"
         )
         parser.add_argument(
-            '-u',
-            '--load_url',
-            action='store',
-            help='Скачать .json по ссылке',
+            "-u",
+            "--load_url",
+            action="store",
+            help="Скачать .json по ссылке",
             required=False,
             default=False
         )
@@ -46,7 +46,7 @@ class Command(BaseCommand):
 
 def load_place(file_path, url=False):
     if not url:
-        with open(file_path, 'rb') as file:
+        with open(file_path, "rb") as file:
             content = json.load(file)
     else:
         response = requests.get(file_path)
@@ -57,8 +57,8 @@ def load_place(file_path, url=False):
         lng=content["coordinates"]["lng"],
         lat=content["coordinates"]["lat"],
         defaults={
-            'description_long': content.get('description_long', ''),
-            'description_short': content.get('description_short', ''),
+            "description_long": content.get("description_long", ""),
+            "description_short": content.get("description_short", ""),
         }
     )
     if is_created:
