@@ -64,7 +64,7 @@ def load_place(file_path, url=False):
     if is_created:
         for index, img in enumerate(content["imgs"]):
             response = requests.get(img)
-            Image.objects.get_or_create(
+            Image.objects.create(
                 place=place,
                 image=ContentFile(response.content, f"{place.title}{index}.jpg"),
                 image_number=index
