@@ -15,6 +15,7 @@ lib/
 lib64/
 parts/
 sdist/
+media/
 var/
 *.egg-info/
 .installed.cfg
@@ -48,3 +49,6 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+*.env
+*.sqlite3

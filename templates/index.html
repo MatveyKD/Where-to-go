@@ -57,10 +57,11 @@
       <div class="place-description" v-if="selectedPlace">
 
         <img v-if="mainPhotoSrc" v-bind:src="mainPhotoSrc" class="d-block shadow mb-3 rounded" v-bind:alt="selectedPlace.title">
-
+        {% verbatim sidebarApp %}
         <h5 class="mb-3">{{ selectedPlace.title }}</h5>
 
         <p>{{ selectedPlace.short_description }}</p>
+        {% endverbatim sidebarApp %}
 
         <div id="place-photos" class="carousel slide mb-3 shadow" data-ride="carousel" data-interval="5000">
           <ol class="carousel-indicators">
@@ -197,7 +198,6 @@
         }
     }).addTo(map);
 
-    {% verbatim sidebarApp %}
     var sidebarApp = new Vue({
       el: '#sidebar-app',
       template: document.getElementById('app-template').innerHTML,
@@ -244,7 +244,6 @@
         }
       },
     });
-    {% endverbatim sidebarApp %}
 
     map.on('click', function () {
       sidebarApp.selectedPlace = null;
