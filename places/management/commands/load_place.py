@@ -1,5 +1,6 @@
 import os
 import json
+import logging
 import requests
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
@@ -50,6 +51,9 @@ def load_place(file_path, url=False):
             content = json.load(file)
     else:
         response = requests.get(file_path)
+        if response.status_code != 200:
+            logging.error("404 ERROR")
+            return
         content = response.json()
 
     place, is_created = Place.objects.get_or_create(
@@ -64,6 +68,9 @@ def load_place(file_path, url=False):
     if is_created:
         for index, img in enumerate(content["imgs"]):
             response = requests.get(img)
+            if response.status_code != 200:
+                logging.error("404 ERROR")
+                return
             Image.objects.create(
                 place=place,
                 image=ContentFile(response.content, f"{place.title}{index}.jpg"),

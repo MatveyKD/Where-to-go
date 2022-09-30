@@ -15,6 +15,7 @@ lib/
 lib64/
 parts/
 sdist/
+.idea/
 media/
 var/
 *.egg-info/
