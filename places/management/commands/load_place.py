@@ -52,7 +52,7 @@ def load_place(file_path, url=False):
     else:
         response = requests.get(file_path)
         if response.ok:
-            logging.error("404 ERROR")
+            logging.error(f"{response.status_code} ERROR")
             return
         content = response.json()
 
@@ -69,7 +69,7 @@ def load_place(file_path, url=False):
         for index, img in enumerate(content["imgs"]):
             response = requests.get(img)
             if response.ok:
-                logging.error("404 ERROR")
+                logging.error(f"{response.status_code} ERROR")
                 return
             Image.objects.create(
                 place=place,
