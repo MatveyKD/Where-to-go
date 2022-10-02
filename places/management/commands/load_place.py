@@ -8,6 +8,9 @@ from django.core.exceptions import MultipleObjectsReturned
 from places.models import Place, Image
 
 
+logger = logging.getLogger(__file__)
+
+
 class Command(BaseCommand):
     help = "Loading place from json"
 
@@ -51,8 +54,8 @@ def load_place(file_path, url=False):
             content = json.load(file)
     else:
         response = requests.get(file_path)
-        if response.ok:
-            logging.error(f"{response.status_code} ERROR")
+        if not response.ok:
+            logger.error(f"{response.status_code} ERROR")
             return
         content = response.json()
 
@@ -68,8 +71,8 @@ def load_place(file_path, url=False):
     if is_created:
         for index, img in enumerate(content["imgs"]):
             response = requests.get(img)
-            if response.ok:
-                logging.error(f"{response.status_code} ERROR")
+            if not response.ok:
+                logger.error(f"{response.status_code} ERROR")
                 return
             Image.objects.create(
                 place=place,
