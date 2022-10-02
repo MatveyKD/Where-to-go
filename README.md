@@ -32,4 +32,4 @@
 
 Чтобы загрузить файл по ссылке, используйте аргумент -u:
 
-    $ python manage.py load_place -u "https://places.com/place.json
+    $ python manage.py load_place -u https://places.com/place.json
